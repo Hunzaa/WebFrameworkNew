@@ -1,0 +1,29 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+  .row.banner
+    .col-12
+      h1= pageHeader.title
+        small &nbsp;#{pageHeader.strapline}
+  .row
+    .col-12.col-md-8
+      .error= message
+
+      each book in books
+        .card
+          .card-block
+            h4
+              a(href="/book/${book._id}")= book.name
+              small &nbsp;
+                +outputRating(book.rating)
+              span.badge.badge-pill.badge-default.float-right= book.published
+            p.author= book.author
+            .categories
+              each category in book.categories
+                span.badge.badge-warning= category
+
+    .col-12.col-md-4
+      p.lead= sidebar
+
